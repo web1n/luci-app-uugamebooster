@@ -142,6 +142,19 @@ bool is_uugamebooster(void)
 	return !strcmp(exe, "/usr/bin/uugamebooster");
 }
 
+bool uu_helper_replace_string(char **target, const char *value)
+{
+	char *replacement;
+
+	if (!value || (*target && !strcmp(*target, value))) return false;
+	replacement = strdup(value);
+	if (!replacement) return false;
+
+	free(*target);
+	*target = replacement;
+	return true;
+}
+
 const char *uu_helper_hostname(void)
 {
 	static char hostname[128];
