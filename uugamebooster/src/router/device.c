@@ -5,7 +5,6 @@
 #endif
 
 #include <arpa/inet.h>
-#include <errno.h>
 #include <libubus.h>
 #include <libubox/blobmsg.h>
 #include <net/if_arp.h>
@@ -19,8 +18,7 @@
 #include "../runtime/helper.h"
 
 static struct uu_router_device router;
-static struct arpreq neighbor;
-static bool enabled, neighbor_added;
+static bool enabled;
 
 static void read_interface(struct ubus_request *request, int type, struct blob_attr *message)
 {
@@ -91,27 +89,6 @@ static bool read_identity(int fd)
 	return read_network(fd, &request);
 }
 
-static bool add_neighbor(int fd)
-{
-	struct sockaddr_in *address = (struct sockaddr_in *)&neighbor.arp_pa;
-
-	address->sin_family = AF_INET;
-	address->sin_addr = router.ip;
-	strcpy(neighbor.arp_dev, router.interface);
-	if (!ioctl(fd, SIOCGARP, &neighbor)) {
-		return (neighbor.arp_flags & ATF_COM) && !memcmp(neighbor.arp_ha.sa_data, router.mac, sizeof(router.mac));
-	}
-	if (errno != ENXIO && errno != ENOENT) return false;
-
-	neighbor.arp_ha.sa_family = ARPHRD_ETHER;
-	memcpy(neighbor.arp_ha.sa_data, router.mac, sizeof(router.mac));
-	neighbor.arp_flags = ATF_COM | ATF_PERM;
-	if (ioctl(fd, SIOCSARP, &neighbor)) return false;
-
-	neighbor_added = true;
-	return true;
-}
-
 void uu_router_device_init(void)
 {
 	int fd;
@@ -124,7 +101,7 @@ void uu_router_device_init(void)
 
 	fd = socket(AF_INET, SOCK_DGRAM | SOCK_CLOEXEC, 0);
 	if (fd < 0) return;
-	if (read_identity(fd) && add_neighbor(fd) && uu_router_arp_init(&router)) {
+	if (read_identity(fd) && uu_router_arp_init(&router)) {
 		snprintf(router.type.mac, sizeof(router.type.mac), "%02x:%02x:%02x:%02x:%02x:%02x",
 			 router.mac[0], router.mac[1], router.mac[2], router.mac[3], router.mac[4], router.mac[5]);
 		strcpy(router.type.type, "windows");
@@ -141,19 +118,5 @@ const struct uu_router_device *uu_router_device_get(void)
 const struct device_type *uu_router_device_type(void)
 {
 	return enabled ? &router.type : NULL;
-}
-
-__attribute__((destructor)) static void remove_neighbor(void)
-{
-	struct arpreq current = neighbor;
-	int fd;
-
-	if (!neighbor_added) return;
-	fd = socket(AF_INET, SOCK_DGRAM | SOCK_CLOEXEC, 0);
-	if (fd < 0) return;
-	if (!ioctl(fd, SIOCGARP, &current) && !memcmp(current.arp_ha.sa_data, router.mac, sizeof(router.mac))) {
-		ioctl(fd, SIOCDARP, &current);
-	}
-	close(fd);
 }
 
