@@ -6,33 +6,52 @@
 #include <libubox/ulog.h>
 
 #include "../config/config.h"
+#include "../router/router.h"
 #include "../runtime/helper.h"
 #include "message_log.h"
 #include "internal.h"
 
+static Uu__Device *find_device(Uu__DeviceList *message, const char *mac)
+{
+	for (size_t i = 0; i < message->n_devices; i++) {
+		if (message->devices[i] && message->devices[i]->mac &&
+		    !strcasecmp(message->devices[i]->mac, mac))
+			return message->devices[i];
+	}
+
+	return NULL;
+}
+
+static bool override_device_type(Uu__Device *device, const struct device_type *type)
+{
+	if (!device || !type || (device->type && !strcmp(device->type, type->type))) return false;
+
+	ULOG_INFO("UU upload DeviceList.devices.type: %s (%s) -> %s\n",
+		  type->mac, device->type ? device->type : "<empty>", type->type);
+	return uu_helper_replace_string(&device->type, type->type);
+}
+
 static bool override_device_types(Uu__DeviceList *message)
 {
+	const struct uu_router_device *router = uu_router_device_get();
 	const struct device_type *devices;
 	size_t device_count;
 	bool modified = false;
 
-	devices = uu_config_devices(&device_count);
+	if (router) {
+		Uu__Device *device = find_device(message, router->type.mac);
 
-	for (size_t i = 0; i < message->n_devices; i++) {
-		Uu__Device *device = message->devices[i];
-		if (!device || !device->mac) continue;
-
-		for (size_t j = 0; j < device_count; j++) {
-			if (strcasecmp(device->mac, devices[j].mac)) continue;
-			if (device->type && !strcmp(device->type, devices[j].type)) break;
-
-			ULOG_INFO("UU upload DeviceList.devices[%zu].type: %s -> %s\n",
-				  i, device->type ? device->type : "<empty>", devices[j].type);
-			if (uu_helper_replace_string(&device->type, devices[j].type)) {
-				modified = true;
-			}
-			break;
+		if (device) {
+			modified |= override_device_type(device, &router->type);
+		} else {
+			ULOG_WARN("UU upload DeviceList: router device not found: %s\n",
+				  router->type.mac);
 		}
+	}
+
+	devices = uu_config_devices(&device_count);
+	for (size_t i = 0; i < device_count; i++) {
+		modified |= override_device_type(find_device(message, devices[i].mac), &devices[i]);
 	}
 
 	return modified;
