@@ -18,8 +18,8 @@ extern const struct uu_message_handler uu_message_handlers[];
 extern const size_t uu_message_handler_count;
 
 void uu_messages_handle_connect_send(ProtobufCMessage *message, bool *modified);
+void uu_messages_handle_device_list_send(ProtobufCMessage *message, bool *modified);
 void uu_messages_handle_acc_receive(ProtobufCMessage *message, bool *modified);
-void uu_messages_handle_bound_user_receive(ProtobufCMessage *message, bool *modified);
 bool uu_messages_update_status(enum uu_message_type type, ProtobufCMessage *message);
 
 #endif

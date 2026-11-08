@@ -6,6 +6,5 @@
 struct json_object;
 
 struct json_object *uuenv_decode(const char *input);
-char *uuenv_merge_rules(const char *input);
 
 #endif

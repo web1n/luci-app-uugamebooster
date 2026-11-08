@@ -1,11 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 
 #include <libubox/ulog.h>
-#include <stdlib.h>
 
 #include "../config/config.h"
 #include "../config/sni_rules.h"
-#include "../config/uuenv.h"
 #include "../runtime/status.h"
 #include "internal.h"
 
@@ -22,21 +20,6 @@ void uu_messages_handle_acc_receive(ProtobufCMessage *base, bool *modified)
 	if (changed < 0) {
 		ULOG_ERR("UU Acc: could not apply SNI rules, original retained\n");
 	} else if (changed > 0) {
-		*modified = true;
-	}
-}
-
-void uu_messages_handle_bound_user_receive(ProtobufCMessage *base, bool *modified)
-{
-	Uu__BoundUser *message = (Uu__BoundUser *)base;
-
-	for (size_t i = 0; i < message->n_hostname_blacklist; i++) {
-		char *merged = uuenv_merge_rules(message->hostname_blacklist[i]);
-
-		if (!merged) continue;
-
-		free(message->hostname_blacklist[i]);
-		message->hostname_blacklist[i] = merged;
 		*modified = true;
 	}
 }
