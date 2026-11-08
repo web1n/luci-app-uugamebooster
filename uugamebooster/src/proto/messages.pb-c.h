@@ -15,16 +15,16 @@ PROTOBUF_C__BEGIN_DECLS
 #endif
 
 
-typedef struct Uu__Device Uu__Device;
-typedef struct Uu__Connect Uu__Connect;
 typedef struct Uu__Acc Uu__Acc;
-typedef struct Uu__StopAcc Uu__StopAcc;
-typedef struct Uu__DeviceRecord Uu__DeviceRecord;
 typedef struct Uu__AutoDeviceRecord Uu__AutoDeviceRecord;
-typedef struct Uu__MeshDeviceRecord Uu__MeshDeviceRecord;
-typedef struct Uu__SniIpKey Uu__SniIpKey;
 typedef struct Uu__BoundUser Uu__BoundUser;
 typedef struct Uu__CheckBoundReply Uu__CheckBoundReply;
+typedef struct Uu__Connect Uu__Connect;
+typedef struct Uu__Device Uu__Device;
+typedef struct Uu__DeviceRecord Uu__DeviceRecord;
+typedef struct Uu__MeshDeviceRecord Uu__MeshDeviceRecord;
+typedef struct Uu__SniIpKey Uu__SniIpKey;
+typedef struct Uu__StopAcc Uu__StopAcc;
 typedef struct Uu__Wol Uu__Wol;
 
 
@@ -32,52 +32,6 @@ typedef struct Uu__Wol Uu__Wol;
 
 
 /* --- messages --- */
-
-struct  Uu__Device
-{
-  ProtobufCMessage base;
-  protobuf_c_boolean has_ip;
-  uint32_t ip;
-  char *mac;
-  char *hostname;
-  char *type;
-};
-#define UU__DEVICE__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__device__descriptor) \
-, 0, 0, NULL, NULL, NULL }
-
-
-struct  Uu__Connect
-{
-  ProtobufCMessage base;
-  char *mid;
-  char *type;
-  char *sn;
-  char *version;
-  char *name;
-  char *model;
-  protobuf_c_boolean has_firmware_version_code;
-  uint32_t firmware_version_code;
-  char *firmware_version_name;
-  char *ssid;
-  char *device_type;
-  char *whoami;
-  char *mode_local;
-  char *plugin_type;
-  char *real_sn;
-  char *firmware_type;
-  char *router_info;
-  protobuf_c_boolean has_wan_ip;
-  uint32_t wan_ip;
-  protobuf_c_boolean has_wan_port_speed;
-  uint32_t wan_port_speed;
-  char *debug_whoami_ip;
-  char *ssid_5g;
-};
-#define UU__CONNECT__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__connect__descriptor) \
-, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL }
-
 
 struct  Uu__Acc
 {
@@ -109,28 +63,6 @@ struct  Uu__Acc
 , NULL, NULL, NULL, NULL, 0,NULL, 0,NULL, 0,NULL, 0,NULL, NULL, NULL, NULL, 0,NULL, 0, 0, NULL, NULL }
 
 
-struct  Uu__StopAcc
-{
-  ProtobufCMessage base;
-  char *mid;
-  Uu__Device *deviceinfo;
-};
-#define UU__STOP_ACC__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__stop_acc__descriptor) \
-, NULL, NULL }
-
-
-struct  Uu__DeviceRecord
-{
-  ProtobufCMessage base;
-  char *mac;
-  char *type;
-};
-#define UU__DEVICE_RECORD__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__device_record__descriptor) \
-, NULL, NULL }
-
-
 struct  Uu__AutoDeviceRecord
 {
   ProtobufCMessage base;
@@ -141,31 +73,6 @@ struct  Uu__AutoDeviceRecord
 #define UU__AUTO_DEVICE_RECORD__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&uu__auto_device_record__descriptor) \
 , NULL, NULL, NULL }
-
-
-struct  Uu__MeshDeviceRecord
-{
-  ProtobufCMessage base;
-  char *mac;
-  char *type;
-  protobuf_c_boolean has_ip;
-  uint32_t ip;
-};
-#define UU__MESH_DEVICE_RECORD__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__mesh_device_record__descriptor) \
-, NULL, NULL, 0, 0 }
-
-
-struct  Uu__SniIpKey
-{
-  ProtobufCMessage base;
-  char *ip;
-  protobuf_c_boolean has_key;
-  int32_t key;
-};
-#define UU__SNI_IP_KEY__INIT \
- { PROTOBUF_C_MESSAGE_INIT (&uu__sni_ip_key__descriptor) \
-, NULL, 0, 0 }
 
 
 struct  Uu__BoundUser
@@ -213,6 +120,99 @@ struct  Uu__CheckBoundReply
 , NULL, 0, 0, NULL, 0,NULL }
 
 
+struct  Uu__Connect
+{
+  ProtobufCMessage base;
+  char *mid;
+  char *type;
+  char *sn;
+  char *version;
+  char *name;
+  char *model;
+  protobuf_c_boolean has_firmware_version_code;
+  uint32_t firmware_version_code;
+  char *firmware_version_name;
+  char *ssid;
+  char *device_type;
+  char *whoami;
+  char *mode_local;
+  char *plugin_type;
+  char *real_sn;
+  char *firmware_type;
+  char *router_info;
+  protobuf_c_boolean has_wan_ip;
+  uint32_t wan_ip;
+  protobuf_c_boolean has_wan_port_speed;
+  uint32_t wan_port_speed;
+  char *debug_whoami_ip;
+  char *ssid_5g;
+};
+#define UU__CONNECT__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__connect__descriptor) \
+, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL }
+
+
+struct  Uu__Device
+{
+  ProtobufCMessage base;
+  protobuf_c_boolean has_ip;
+  uint32_t ip;
+  char *mac;
+  char *hostname;
+  char *type;
+};
+#define UU__DEVICE__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__device__descriptor) \
+, 0, 0, NULL, NULL, NULL }
+
+
+struct  Uu__DeviceRecord
+{
+  ProtobufCMessage base;
+  char *mac;
+  char *type;
+};
+#define UU__DEVICE_RECORD__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__device_record__descriptor) \
+, NULL, NULL }
+
+
+struct  Uu__MeshDeviceRecord
+{
+  ProtobufCMessage base;
+  char *mac;
+  char *type;
+  protobuf_c_boolean has_ip;
+  uint32_t ip;
+};
+#define UU__MESH_DEVICE_RECORD__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__mesh_device_record__descriptor) \
+, NULL, NULL, 0, 0 }
+
+
+struct  Uu__SniIpKey
+{
+  ProtobufCMessage base;
+  char *ip;
+  protobuf_c_boolean has_key;
+  int32_t key;
+};
+#define UU__SNI_IP_KEY__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__sni_ip_key__descriptor) \
+, NULL, 0, 0 }
+
+
+struct  Uu__StopAcc
+{
+  ProtobufCMessage base;
+  char *mid;
+  Uu__Device *deviceinfo;
+};
+#define UU__STOP_ACC__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__stop_acc__descriptor) \
+, NULL, NULL }
+
+
 struct  Uu__Wol
 {
   ProtobufCMessage base;
@@ -224,44 +224,6 @@ struct  Uu__Wol
 , NULL, NULL }
 
 
-/* Uu__Device methods */
-void   uu__device__init
-                     (Uu__Device         *message);
-size_t uu__device__get_packed_size
-                     (const Uu__Device   *message);
-size_t uu__device__pack
-                     (const Uu__Device   *message,
-                      uint8_t             *out);
-size_t uu__device__pack_to_buffer
-                     (const Uu__Device   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__Device *
-       uu__device__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__device__free_unpacked
-                     (Uu__Device *message,
-                      ProtobufCAllocator *allocator);
-/* Uu__Connect methods */
-void   uu__connect__init
-                     (Uu__Connect         *message);
-size_t uu__connect__get_packed_size
-                     (const Uu__Connect   *message);
-size_t uu__connect__pack
-                     (const Uu__Connect   *message,
-                      uint8_t             *out);
-size_t uu__connect__pack_to_buffer
-                     (const Uu__Connect   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__Connect *
-       uu__connect__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__connect__free_unpacked
-                     (Uu__Connect *message,
-                      ProtobufCAllocator *allocator);
 /* Uu__Acc methods */
 void   uu__acc__init
                      (Uu__Acc         *message);
@@ -281,44 +243,6 @@ Uu__Acc *
 void   uu__acc__free_unpacked
                      (Uu__Acc *message,
                       ProtobufCAllocator *allocator);
-/* Uu__StopAcc methods */
-void   uu__stop_acc__init
-                     (Uu__StopAcc         *message);
-size_t uu__stop_acc__get_packed_size
-                     (const Uu__StopAcc   *message);
-size_t uu__stop_acc__pack
-                     (const Uu__StopAcc   *message,
-                      uint8_t             *out);
-size_t uu__stop_acc__pack_to_buffer
-                     (const Uu__StopAcc   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__StopAcc *
-       uu__stop_acc__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__stop_acc__free_unpacked
-                     (Uu__StopAcc *message,
-                      ProtobufCAllocator *allocator);
-/* Uu__DeviceRecord methods */
-void   uu__device_record__init
-                     (Uu__DeviceRecord         *message);
-size_t uu__device_record__get_packed_size
-                     (const Uu__DeviceRecord   *message);
-size_t uu__device_record__pack
-                     (const Uu__DeviceRecord   *message,
-                      uint8_t             *out);
-size_t uu__device_record__pack_to_buffer
-                     (const Uu__DeviceRecord   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__DeviceRecord *
-       uu__device_record__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__device_record__free_unpacked
-                     (Uu__DeviceRecord *message,
-                      ProtobufCAllocator *allocator);
 /* Uu__AutoDeviceRecord methods */
 void   uu__auto_device_record__init
                      (Uu__AutoDeviceRecord         *message);
@@ -337,44 +261,6 @@ Uu__AutoDeviceRecord *
                       const uint8_t       *data);
 void   uu__auto_device_record__free_unpacked
                      (Uu__AutoDeviceRecord *message,
-                      ProtobufCAllocator *allocator);
-/* Uu__MeshDeviceRecord methods */
-void   uu__mesh_device_record__init
-                     (Uu__MeshDeviceRecord         *message);
-size_t uu__mesh_device_record__get_packed_size
-                     (const Uu__MeshDeviceRecord   *message);
-size_t uu__mesh_device_record__pack
-                     (const Uu__MeshDeviceRecord   *message,
-                      uint8_t             *out);
-size_t uu__mesh_device_record__pack_to_buffer
-                     (const Uu__MeshDeviceRecord   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__MeshDeviceRecord *
-       uu__mesh_device_record__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__mesh_device_record__free_unpacked
-                     (Uu__MeshDeviceRecord *message,
-                      ProtobufCAllocator *allocator);
-/* Uu__SniIpKey methods */
-void   uu__sni_ip_key__init
-                     (Uu__SniIpKey         *message);
-size_t uu__sni_ip_key__get_packed_size
-                     (const Uu__SniIpKey   *message);
-size_t uu__sni_ip_key__pack
-                     (const Uu__SniIpKey   *message,
-                      uint8_t             *out);
-size_t uu__sni_ip_key__pack_to_buffer
-                     (const Uu__SniIpKey   *message,
-                      ProtobufCBuffer     *buffer);
-Uu__SniIpKey *
-       uu__sni_ip_key__unpack
-                     (ProtobufCAllocator  *allocator,
-                      size_t               len,
-                      const uint8_t       *data);
-void   uu__sni_ip_key__free_unpacked
-                     (Uu__SniIpKey *message,
                       ProtobufCAllocator *allocator);
 /* Uu__BoundUser methods */
 void   uu__bound_user__init
@@ -414,6 +300,120 @@ Uu__CheckBoundReply *
 void   uu__check_bound_reply__free_unpacked
                      (Uu__CheckBoundReply *message,
                       ProtobufCAllocator *allocator);
+/* Uu__Connect methods */
+void   uu__connect__init
+                     (Uu__Connect         *message);
+size_t uu__connect__get_packed_size
+                     (const Uu__Connect   *message);
+size_t uu__connect__pack
+                     (const Uu__Connect   *message,
+                      uint8_t             *out);
+size_t uu__connect__pack_to_buffer
+                     (const Uu__Connect   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__Connect *
+       uu__connect__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__connect__free_unpacked
+                     (Uu__Connect *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__Device methods */
+void   uu__device__init
+                     (Uu__Device         *message);
+size_t uu__device__get_packed_size
+                     (const Uu__Device   *message);
+size_t uu__device__pack
+                     (const Uu__Device   *message,
+                      uint8_t             *out);
+size_t uu__device__pack_to_buffer
+                     (const Uu__Device   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__Device *
+       uu__device__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__device__free_unpacked
+                     (Uu__Device *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__DeviceRecord methods */
+void   uu__device_record__init
+                     (Uu__DeviceRecord         *message);
+size_t uu__device_record__get_packed_size
+                     (const Uu__DeviceRecord   *message);
+size_t uu__device_record__pack
+                     (const Uu__DeviceRecord   *message,
+                      uint8_t             *out);
+size_t uu__device_record__pack_to_buffer
+                     (const Uu__DeviceRecord   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__DeviceRecord *
+       uu__device_record__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__device_record__free_unpacked
+                     (Uu__DeviceRecord *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__MeshDeviceRecord methods */
+void   uu__mesh_device_record__init
+                     (Uu__MeshDeviceRecord         *message);
+size_t uu__mesh_device_record__get_packed_size
+                     (const Uu__MeshDeviceRecord   *message);
+size_t uu__mesh_device_record__pack
+                     (const Uu__MeshDeviceRecord   *message,
+                      uint8_t             *out);
+size_t uu__mesh_device_record__pack_to_buffer
+                     (const Uu__MeshDeviceRecord   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__MeshDeviceRecord *
+       uu__mesh_device_record__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__mesh_device_record__free_unpacked
+                     (Uu__MeshDeviceRecord *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__SniIpKey methods */
+void   uu__sni_ip_key__init
+                     (Uu__SniIpKey         *message);
+size_t uu__sni_ip_key__get_packed_size
+                     (const Uu__SniIpKey   *message);
+size_t uu__sni_ip_key__pack
+                     (const Uu__SniIpKey   *message,
+                      uint8_t             *out);
+size_t uu__sni_ip_key__pack_to_buffer
+                     (const Uu__SniIpKey   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__SniIpKey *
+       uu__sni_ip_key__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__sni_ip_key__free_unpacked
+                     (Uu__SniIpKey *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__StopAcc methods */
+void   uu__stop_acc__init
+                     (Uu__StopAcc         *message);
+size_t uu__stop_acc__get_packed_size
+                     (const Uu__StopAcc   *message);
+size_t uu__stop_acc__pack
+                     (const Uu__StopAcc   *message,
+                      uint8_t             *out);
+size_t uu__stop_acc__pack_to_buffer
+                     (const Uu__StopAcc   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__StopAcc *
+       uu__stop_acc__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__stop_acc__free_unpacked
+                     (Uu__StopAcc *message,
+                      ProtobufCAllocator *allocator);
 /* Uu__Wol methods */
 void   uu__wol__init
                      (Uu__Wol         *message);
@@ -435,23 +435,26 @@ void   uu__wol__free_unpacked
                       ProtobufCAllocator *allocator);
 /* --- per-message closures --- */
 
-typedef void (*Uu__Device_Closure)
-                 (const Uu__Device *message,
+typedef void (*Uu__Acc_Closure)
+                 (const Uu__Acc *message,
+                  void *closure_data);
+typedef void (*Uu__AutoDeviceRecord_Closure)
+                 (const Uu__AutoDeviceRecord *message,
+                  void *closure_data);
+typedef void (*Uu__BoundUser_Closure)
+                 (const Uu__BoundUser *message,
+                  void *closure_data);
+typedef void (*Uu__CheckBoundReply_Closure)
+                 (const Uu__CheckBoundReply *message,
                   void *closure_data);
 typedef void (*Uu__Connect_Closure)
                  (const Uu__Connect *message,
                   void *closure_data);
-typedef void (*Uu__Acc_Closure)
-                 (const Uu__Acc *message,
-                  void *closure_data);
-typedef void (*Uu__StopAcc_Closure)
-                 (const Uu__StopAcc *message,
+typedef void (*Uu__Device_Closure)
+                 (const Uu__Device *message,
                   void *closure_data);
 typedef void (*Uu__DeviceRecord_Closure)
                  (const Uu__DeviceRecord *message,
-                  void *closure_data);
-typedef void (*Uu__AutoDeviceRecord_Closure)
-                 (const Uu__AutoDeviceRecord *message,
                   void *closure_data);
 typedef void (*Uu__MeshDeviceRecord_Closure)
                  (const Uu__MeshDeviceRecord *message,
@@ -459,11 +462,8 @@ typedef void (*Uu__MeshDeviceRecord_Closure)
 typedef void (*Uu__SniIpKey_Closure)
                  (const Uu__SniIpKey *message,
                   void *closure_data);
-typedef void (*Uu__BoundUser_Closure)
-                 (const Uu__BoundUser *message,
-                  void *closure_data);
-typedef void (*Uu__CheckBoundReply_Closure)
-                 (const Uu__CheckBoundReply *message,
+typedef void (*Uu__StopAcc_Closure)
+                 (const Uu__StopAcc *message,
                   void *closure_data);
 typedef void (*Uu__Wol_Closure)
                  (const Uu__Wol *message,
@@ -474,16 +474,16 @@ typedef void (*Uu__Wol_Closure)
 
 /* --- descriptors --- */
 
-extern const ProtobufCMessageDescriptor uu__device__descriptor;
-extern const ProtobufCMessageDescriptor uu__connect__descriptor;
 extern const ProtobufCMessageDescriptor uu__acc__descriptor;
-extern const ProtobufCMessageDescriptor uu__stop_acc__descriptor;
-extern const ProtobufCMessageDescriptor uu__device_record__descriptor;
 extern const ProtobufCMessageDescriptor uu__auto_device_record__descriptor;
-extern const ProtobufCMessageDescriptor uu__mesh_device_record__descriptor;
-extern const ProtobufCMessageDescriptor uu__sni_ip_key__descriptor;
 extern const ProtobufCMessageDescriptor uu__bound_user__descriptor;
 extern const ProtobufCMessageDescriptor uu__check_bound_reply__descriptor;
+extern const ProtobufCMessageDescriptor uu__connect__descriptor;
+extern const ProtobufCMessageDescriptor uu__device__descriptor;
+extern const ProtobufCMessageDescriptor uu__device_record__descriptor;
+extern const ProtobufCMessageDescriptor uu__mesh_device_record__descriptor;
+extern const ProtobufCMessageDescriptor uu__sni_ip_key__descriptor;
+extern const ProtobufCMessageDescriptor uu__stop_acc__descriptor;
 extern const ProtobufCMessageDescriptor uu__wol__descriptor;
 
 PROTOBUF_C__END_DECLS
