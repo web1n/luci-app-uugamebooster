@@ -26,6 +26,7 @@ struct uu_capture {
 	X(UU_MESSAGE_ECHO_REPLY, EchoReply) \
 	X(UU_MESSAGE_CONNECT, Connect) \
 	X(UU_MESSAGE_CONNECT_REPLY, ConnectReply) \
+	X(UU_MESSAGE_DEVICE_LIST, DeviceList) \
 	X(UU_MESSAGE_ACC, Acc) \
 	X(UU_MESSAGE_STOP_ACC, StopAcc) \
 	X(UU_MESSAGE_UPGRADE, Upgrade) \

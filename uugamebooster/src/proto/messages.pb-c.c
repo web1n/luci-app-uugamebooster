@@ -277,6 +277,51 @@ void   uu__device__free_unpacked
   assert(message->base.descriptor == &uu__device__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+void   uu__device_list__init
+                     (Uu__DeviceList         *message)
+{
+  static const Uu__DeviceList init_value = UU__DEVICE_LIST__INIT;
+  *message = init_value;
+}
+size_t uu__device_list__get_packed_size
+                     (const Uu__DeviceList *message)
+{
+  assert(message->base.descriptor == &uu__device_list__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t uu__device_list__pack
+                     (const Uu__DeviceList *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &uu__device_list__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t uu__device_list__pack_to_buffer
+                     (const Uu__DeviceList *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &uu__device_list__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+Uu__DeviceList *
+       uu__device_list__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (Uu__DeviceList *)
+     protobuf_c_message_unpack (&uu__device_list__descriptor,
+                                allocator, len, data);
+}
+void   uu__device_list__free_unpacked
+                     (Uu__DeviceList *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &uu__device_list__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   uu__device_record__init
                      (Uu__DeviceRecord         *message)
 {
@@ -455,6 +500,51 @@ void   uu__stop_acc__free_unpacked
   if(!message)
     return;
   assert(message->base.descriptor == &uu__stop_acc__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
+void   uu__timestamp__init
+                     (Uu__Timestamp         *message)
+{
+  static const Uu__Timestamp init_value = UU__TIMESTAMP__INIT;
+  *message = init_value;
+}
+size_t uu__timestamp__get_packed_size
+                     (const Uu__Timestamp *message)
+{
+  assert(message->base.descriptor == &uu__timestamp__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t uu__timestamp__pack
+                     (const Uu__Timestamp *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &uu__timestamp__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t uu__timestamp__pack_to_buffer
+                     (const Uu__Timestamp *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &uu__timestamp__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+Uu__Timestamp *
+       uu__timestamp__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (Uu__Timestamp *)
+     protobuf_c_message_unpack (&uu__timestamp__descriptor,
+                                allocator, len, data);
+}
+void   uu__timestamp__free_unpacked
+                     (Uu__Timestamp *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &uu__timestamp__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
 void   uu__wol__init
@@ -1335,7 +1425,7 @@ const ProtobufCMessageDescriptor uu__connect__descriptor =
   (ProtobufCMessageInit) uu__connect__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
-static const ProtobufCFieldDescriptor uu__device__field_descriptors[4] =
+static const ProtobufCFieldDescriptor uu__device__field_descriptors[11] =
 {
   {
     "ip",
@@ -1385,17 +1475,108 @@ static const ProtobufCFieldDescriptor uu__device__field_descriptors[4] =
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
+  {
+    "online",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BOOL,
+    offsetof(Uu__Device, has_online),
+    offsetof(Uu__Device, online),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "timestamp",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(Uu__Device, timestamp),
+    &uu__timestamp__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value7",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__Device, value7),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value8",
+    8,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__Device, has_value8),
+    offsetof(Uu__Device, value8),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value9",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__Device, value9),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value10",
+    10,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_INT32,
+    offsetof(Uu__Device, has_value10),
+    offsetof(Uu__Device, value10),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value11",
+    11,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__Device, has_value11),
+    offsetof(Uu__Device, value11),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
 };
 static const unsigned uu__device__field_indices_by_name[] = {
   2,   /* field[2] = hostname */
   0,   /* field[0] = ip */
   1,   /* field[1] = mac */
+  4,   /* field[4] = online */
+  5,   /* field[5] = timestamp */
   3,   /* field[3] = type */
+  9,   /* field[9] = value10 */
+  10,   /* field[10] = value11 */
+  6,   /* field[6] = value7 */
+  7,   /* field[7] = value8 */
+  8,   /* field[8] = value9 */
 };
 static const ProtobufCIntRange uu__device__number_ranges[1 + 1] =
 {
   { 1, 0 },
-  { 0, 4 }
+  { 0, 11 }
 };
 const ProtobufCMessageDescriptor uu__device__descriptor =
 {
@@ -1405,11 +1586,101 @@ const ProtobufCMessageDescriptor uu__device__descriptor =
   "Uu__Device",
   "uu",
   sizeof(Uu__Device),
-  4,
+  11,
   uu__device__field_descriptors,
   uu__device__field_indices_by_name,
   1,  uu__device__number_ranges,
   (ProtobufCMessageInit) uu__device__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor uu__device_list__field_descriptors[5] =
+{
+  {
+    "mid",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__DeviceList, mid),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "devices",
+    2,
+    PROTOBUF_C_LABEL_REPEATED,
+    PROTOBUF_C_TYPE_MESSAGE,
+    offsetof(Uu__DeviceList, n_devices),
+    offsetof(Uu__DeviceList, devices),
+    &uu__device__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "timestamp",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(Uu__DeviceList, timestamp),
+    &uu__timestamp__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "router_type",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__DeviceList, router_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "router_mac",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__DeviceList, router_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned uu__device_list__field_indices_by_name[] = {
+  1,   /* field[1] = devices */
+  0,   /* field[0] = mid */
+  4,   /* field[4] = router_mac */
+  3,   /* field[3] = router_type */
+  2,   /* field[2] = timestamp */
+};
+static const ProtobufCIntRange uu__device_list__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 5 }
+};
+const ProtobufCMessageDescriptor uu__device_list__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "uu.DeviceList",
+  "DeviceList",
+  "Uu__DeviceList",
+  "uu",
+  sizeof(Uu__DeviceList),
+  5,
+  uu__device_list__field_descriptors,
+  uu__device_list__field_indices_by_name,
+  1,  uu__device_list__number_ranges,
+  (ProtobufCMessageInit) uu__device_list__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
 static const ProtobufCFieldDescriptor uu__device_record__field_descriptors[2] =
@@ -1627,6 +1898,57 @@ const ProtobufCMessageDescriptor uu__stop_acc__descriptor =
   uu__stop_acc__field_indices_by_name,
   1,  uu__stop_acc__number_ranges,
   (ProtobufCMessageInit) uu__stop_acc__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor uu__timestamp__field_descriptors[2] =
+{
+  {
+    "seconds",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT64,
+    offsetof(Uu__Timestamp, has_seconds),
+    offsetof(Uu__Timestamp, seconds),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "microseconds",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT64,
+    offsetof(Uu__Timestamp, has_microseconds),
+    offsetof(Uu__Timestamp, microseconds),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned uu__timestamp__field_indices_by_name[] = {
+  1,   /* field[1] = microseconds */
+  0,   /* field[0] = seconds */
+};
+static const ProtobufCIntRange uu__timestamp__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 2 }
+};
+const ProtobufCMessageDescriptor uu__timestamp__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "uu.Timestamp",
+  "Timestamp",
+  "Uu__Timestamp",
+  "uu",
+  sizeof(Uu__Timestamp),
+  2,
+  uu__timestamp__field_descriptors,
+  uu__timestamp__field_indices_by_name,
+  1,  uu__timestamp__number_ranges,
+  (ProtobufCMessageInit) uu__timestamp__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
 static const ProtobufCFieldDescriptor uu__wol__field_descriptors[2] =

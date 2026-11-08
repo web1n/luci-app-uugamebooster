@@ -76,6 +76,21 @@ message Device {
   optional string mac = 2;
   optional string hostname = 3;
   optional string type = 4;
+  optional bool online = 5;
+  optional Timestamp timestamp = 6;
+  optional string value7 = 7;
+  optional uint32 value8 = 8;
+  optional string value9 = 9;
+  optional int32 value10 = 10;
+  optional uint32 value11 = 11;
+}
+
+message DeviceList {
+  optional string mid = 1;
+  repeated Device devices = 2;
+  optional Timestamp timestamp = 3;
+  optional string router_type = 4;
+  optional string router_mac = 5;
 }
 
 message DeviceRecord {
@@ -97,6 +112,11 @@ message SniIpKey {
 message StopAcc {
   optional string mid = 1;
   optional Device deviceinfo = 2;
+}
+
+message Timestamp {
+  optional uint64 seconds = 1;
+  optional uint64 microseconds = 2;
 }
 
 message Wol {

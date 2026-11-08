@@ -21,10 +21,12 @@ typedef struct Uu__BoundUser Uu__BoundUser;
 typedef struct Uu__CheckBoundReply Uu__CheckBoundReply;
 typedef struct Uu__Connect Uu__Connect;
 typedef struct Uu__Device Uu__Device;
+typedef struct Uu__DeviceList Uu__DeviceList;
 typedef struct Uu__DeviceRecord Uu__DeviceRecord;
 typedef struct Uu__MeshDeviceRecord Uu__MeshDeviceRecord;
 typedef struct Uu__SniIpKey Uu__SniIpKey;
 typedef struct Uu__StopAcc Uu__StopAcc;
+typedef struct Uu__Timestamp Uu__Timestamp;
 typedef struct Uu__Wol Uu__Wol;
 
 
@@ -160,10 +162,36 @@ struct  Uu__Device
   char *mac;
   char *hostname;
   char *type;
+  protobuf_c_boolean has_online;
+  protobuf_c_boolean online;
+  Uu__Timestamp *timestamp;
+  char *value7;
+  protobuf_c_boolean has_value8;
+  uint32_t value8;
+  char *value9;
+  protobuf_c_boolean has_value10;
+  int32_t value10;
+  protobuf_c_boolean has_value11;
+  uint32_t value11;
 };
 #define UU__DEVICE__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&uu__device__descriptor) \
-, 0, 0, NULL, NULL, NULL }
+, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0 }
+
+
+struct  Uu__DeviceList
+{
+  ProtobufCMessage base;
+  char *mid;
+  size_t n_devices;
+  Uu__Device **devices;
+  Uu__Timestamp *timestamp;
+  char *router_type;
+  char *router_mac;
+};
+#define UU__DEVICE_LIST__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__device_list__descriptor) \
+, NULL, 0,NULL, NULL, NULL, NULL }
 
 
 struct  Uu__DeviceRecord
@@ -211,6 +239,19 @@ struct  Uu__StopAcc
 #define UU__STOP_ACC__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&uu__stop_acc__descriptor) \
 , NULL, NULL }
+
+
+struct  Uu__Timestamp
+{
+  ProtobufCMessage base;
+  protobuf_c_boolean has_seconds;
+  uint64_t seconds;
+  protobuf_c_boolean has_microseconds;
+  uint64_t microseconds;
+};
+#define UU__TIMESTAMP__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__timestamp__descriptor) \
+, 0, 0, 0, 0 }
 
 
 struct  Uu__Wol
@@ -338,6 +379,25 @@ Uu__Device *
 void   uu__device__free_unpacked
                      (Uu__Device *message,
                       ProtobufCAllocator *allocator);
+/* Uu__DeviceList methods */
+void   uu__device_list__init
+                     (Uu__DeviceList         *message);
+size_t uu__device_list__get_packed_size
+                     (const Uu__DeviceList   *message);
+size_t uu__device_list__pack
+                     (const Uu__DeviceList   *message,
+                      uint8_t             *out);
+size_t uu__device_list__pack_to_buffer
+                     (const Uu__DeviceList   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__DeviceList *
+       uu__device_list__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__device_list__free_unpacked
+                     (Uu__DeviceList *message,
+                      ProtobufCAllocator *allocator);
 /* Uu__DeviceRecord methods */
 void   uu__device_record__init
                      (Uu__DeviceRecord         *message);
@@ -414,6 +474,25 @@ Uu__StopAcc *
 void   uu__stop_acc__free_unpacked
                      (Uu__StopAcc *message,
                       ProtobufCAllocator *allocator);
+/* Uu__Timestamp methods */
+void   uu__timestamp__init
+                     (Uu__Timestamp         *message);
+size_t uu__timestamp__get_packed_size
+                     (const Uu__Timestamp   *message);
+size_t uu__timestamp__pack
+                     (const Uu__Timestamp   *message,
+                      uint8_t             *out);
+size_t uu__timestamp__pack_to_buffer
+                     (const Uu__Timestamp   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__Timestamp *
+       uu__timestamp__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__timestamp__free_unpacked
+                     (Uu__Timestamp *message,
+                      ProtobufCAllocator *allocator);
 /* Uu__Wol methods */
 void   uu__wol__init
                      (Uu__Wol         *message);
@@ -453,6 +532,9 @@ typedef void (*Uu__Connect_Closure)
 typedef void (*Uu__Device_Closure)
                  (const Uu__Device *message,
                   void *closure_data);
+typedef void (*Uu__DeviceList_Closure)
+                 (const Uu__DeviceList *message,
+                  void *closure_data);
 typedef void (*Uu__DeviceRecord_Closure)
                  (const Uu__DeviceRecord *message,
                   void *closure_data);
@@ -464,6 +546,9 @@ typedef void (*Uu__SniIpKey_Closure)
                   void *closure_data);
 typedef void (*Uu__StopAcc_Closure)
                  (const Uu__StopAcc *message,
+                  void *closure_data);
+typedef void (*Uu__Timestamp_Closure)
+                 (const Uu__Timestamp *message,
                   void *closure_data);
 typedef void (*Uu__Wol_Closure)
                  (const Uu__Wol *message,
@@ -480,10 +565,12 @@ extern const ProtobufCMessageDescriptor uu__bound_user__descriptor;
 extern const ProtobufCMessageDescriptor uu__check_bound_reply__descriptor;
 extern const ProtobufCMessageDescriptor uu__connect__descriptor;
 extern const ProtobufCMessageDescriptor uu__device__descriptor;
+extern const ProtobufCMessageDescriptor uu__device_list__descriptor;
 extern const ProtobufCMessageDescriptor uu__device_record__descriptor;
 extern const ProtobufCMessageDescriptor uu__mesh_device_record__descriptor;
 extern const ProtobufCMessageDescriptor uu__sni_ip_key__descriptor;
 extern const ProtobufCMessageDescriptor uu__stop_acc__descriptor;
+extern const ProtobufCMessageDescriptor uu__timestamp__descriptor;
 extern const ProtobufCMessageDescriptor uu__wol__descriptor;
 
 PROTOBUF_C__END_DECLS

@@ -7,6 +7,7 @@ const struct uu_message_handler uu_message_handlers[] = {
 		.descriptor = &uu__connect__descriptor,
 		.send = uu_messages_handle_connect_send,
 	},
+	[UU_MESSAGE_DEVICE_LIST] = { .descriptor = &uu__device_list__descriptor },
 	[UU_MESSAGE_ACC] = {
 		.descriptor = &uu__acc__descriptor,
 		.receive = uu_messages_handle_acc_receive,
