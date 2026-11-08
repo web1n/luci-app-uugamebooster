@@ -52,6 +52,51 @@ void   uu__acc__free_unpacked
   assert(message->base.descriptor == &uu__acc__descriptor);
   protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
 }
+void   uu__acc_reply__init
+                     (Uu__AccReply         *message)
+{
+  static const Uu__AccReply init_value = UU__ACC_REPLY__INIT;
+  *message = init_value;
+}
+size_t uu__acc_reply__get_packed_size
+                     (const Uu__AccReply *message)
+{
+  assert(message->base.descriptor == &uu__acc_reply__descriptor);
+  return protobuf_c_message_get_packed_size ((const ProtobufCMessage*)(message));
+}
+size_t uu__acc_reply__pack
+                     (const Uu__AccReply *message,
+                      uint8_t       *out)
+{
+  assert(message->base.descriptor == &uu__acc_reply__descriptor);
+  return protobuf_c_message_pack ((const ProtobufCMessage*)message, out);
+}
+size_t uu__acc_reply__pack_to_buffer
+                     (const Uu__AccReply *message,
+                      ProtobufCBuffer *buffer)
+{
+  assert(message->base.descriptor == &uu__acc_reply__descriptor);
+  return protobuf_c_message_pack_to_buffer ((const ProtobufCMessage*)message, buffer);
+}
+Uu__AccReply *
+       uu__acc_reply__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data)
+{
+  return (Uu__AccReply *)
+     protobuf_c_message_unpack (&uu__acc_reply__descriptor,
+                                allocator, len, data);
+}
+void   uu__acc_reply__free_unpacked
+                     (Uu__AccReply *message,
+                      ProtobufCAllocator *allocator)
+{
+  if(!message)
+    return;
+  assert(message->base.descriptor == &uu__acc_reply__descriptor);
+  protobuf_c_message_free_unpacked ((ProtobufCMessage*)message, allocator);
+}
 void   uu__auto_device_record__init
                      (Uu__AutoDeviceRecord         *message)
 {
@@ -815,6 +860,226 @@ const ProtobufCMessageDescriptor uu__acc__descriptor =
   uu__acc__field_indices_by_name,
   6,  uu__acc__number_ranges,
   (ProtobufCMessageInit) uu__acc__init,
+  NULL,NULL,NULL    /* reserved[123] */
+};
+static const ProtobufCFieldDescriptor uu__acc_reply__field_descriptors[15] =
+{
+  {
+    "mid",
+    1,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, mid),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "deviceinfo",
+    2,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, deviceinfo),
+    &uu__device__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "result",
+    3,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__AccReply, has_result),
+    offsetof(Uu__AccReply, result),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "timestamp",
+    4,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_MESSAGE,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, timestamp),
+    &uu__timestamp__descriptor,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "server_ip",
+    5,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__AccReply, has_server_ip),
+    offsetof(Uu__AccReply, server_ip),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "server_port",
+    6,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__AccReply, has_server_port),
+    offsetof(Uu__AccReply, server_port),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "router_type",
+    7,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, router_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "router_mac",
+    8,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, router_mac),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "route_key",
+    9,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, route_key),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "route_type",
+    10,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, route_type),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "extra_ip",
+    11,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__AccReply, has_extra_ip),
+    offsetof(Uu__AccReply, extra_ip),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "extra_ip2",
+    12,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_UINT32,
+    offsetof(Uu__AccReply, has_extra_ip2),
+    offsetof(Uu__AccReply, extra_ip2),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value13",
+    13,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BYTES,
+    offsetof(Uu__AccReply, has_value13),
+    offsetof(Uu__AccReply, value13),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "value14",
+    14,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_BYTES,
+    offsetof(Uu__AccReply, has_value14),
+    offsetof(Uu__AccReply, value14),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+  {
+    "token",
+    15,
+    PROTOBUF_C_LABEL_OPTIONAL,
+    PROTOBUF_C_TYPE_STRING,
+    0,   /* quantifier_offset */
+    offsetof(Uu__AccReply, token),
+    NULL,
+    NULL,
+    0,             /* flags */
+    0,NULL,NULL    /* reserved1,reserved2, etc */
+  },
+};
+static const unsigned uu__acc_reply__field_indices_by_name[] = {
+  1,   /* field[1] = deviceinfo */
+  10,   /* field[10] = extra_ip */
+  11,   /* field[11] = extra_ip2 */
+  0,   /* field[0] = mid */
+  2,   /* field[2] = result */
+  8,   /* field[8] = route_key */
+  9,   /* field[9] = route_type */
+  7,   /* field[7] = router_mac */
+  6,   /* field[6] = router_type */
+  4,   /* field[4] = server_ip */
+  5,   /* field[5] = server_port */
+  3,   /* field[3] = timestamp */
+  14,   /* field[14] = token */
+  12,   /* field[12] = value13 */
+  13,   /* field[13] = value14 */
+};
+static const ProtobufCIntRange uu__acc_reply__number_ranges[1 + 1] =
+{
+  { 1, 0 },
+  { 0, 15 }
+};
+const ProtobufCMessageDescriptor uu__acc_reply__descriptor =
+{
+  PROTOBUF_C__MESSAGE_DESCRIPTOR_MAGIC,
+  "uu.AccReply",
+  "AccReply",
+  "Uu__AccReply",
+  "uu",
+  sizeof(Uu__AccReply),
+  15,
+  uu__acc_reply__field_descriptors,
+  uu__acc_reply__field_indices_by_name,
+  1,  uu__acc_reply__number_ranges,
+  (ProtobufCMessageInit) uu__acc_reply__init,
   NULL,NULL,NULL    /* reserved[123] */
 };
 static const ProtobufCFieldDescriptor uu__auto_device_record__field_descriptors[3] =

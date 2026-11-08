@@ -16,6 +16,7 @@ PROTOBUF_C__BEGIN_DECLS
 
 
 typedef struct Uu__Acc Uu__Acc;
+typedef struct Uu__AccReply Uu__AccReply;
 typedef struct Uu__AutoDeviceRecord Uu__AutoDeviceRecord;
 typedef struct Uu__BoundUser Uu__BoundUser;
 typedef struct Uu__CheckBoundReply Uu__CheckBoundReply;
@@ -63,6 +64,37 @@ struct  Uu__Acc
 #define UU__ACC__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&uu__acc__descriptor) \
 , NULL, NULL, NULL, NULL, 0,NULL, 0,NULL, 0,NULL, 0,NULL, NULL, NULL, NULL, 0,NULL, 0, 0, NULL, NULL }
+
+
+struct  Uu__AccReply
+{
+  ProtobufCMessage base;
+  char *mid;
+  Uu__Device *deviceinfo;
+  protobuf_c_boolean has_result;
+  uint32_t result;
+  Uu__Timestamp *timestamp;
+  protobuf_c_boolean has_server_ip;
+  uint32_t server_ip;
+  protobuf_c_boolean has_server_port;
+  uint32_t server_port;
+  char *router_type;
+  char *router_mac;
+  char *route_key;
+  char *route_type;
+  protobuf_c_boolean has_extra_ip;
+  uint32_t extra_ip;
+  protobuf_c_boolean has_extra_ip2;
+  uint32_t extra_ip2;
+  protobuf_c_boolean has_value13;
+  ProtobufCBinaryData value13;
+  protobuf_c_boolean has_value14;
+  ProtobufCBinaryData value14;
+  char *token;
+};
+#define UU__ACC_REPLY__INIT \
+ { PROTOBUF_C_MESSAGE_INIT (&uu__acc_reply__descriptor) \
+, NULL, NULL, 0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, {0,NULL}, 0, {0,NULL}, NULL }
 
 
 struct  Uu__AutoDeviceRecord
@@ -283,6 +315,25 @@ Uu__Acc *
                       const uint8_t       *data);
 void   uu__acc__free_unpacked
                      (Uu__Acc *message,
+                      ProtobufCAllocator *allocator);
+/* Uu__AccReply methods */
+void   uu__acc_reply__init
+                     (Uu__AccReply         *message);
+size_t uu__acc_reply__get_packed_size
+                     (const Uu__AccReply   *message);
+size_t uu__acc_reply__pack
+                     (const Uu__AccReply   *message,
+                      uint8_t             *out);
+size_t uu__acc_reply__pack_to_buffer
+                     (const Uu__AccReply   *message,
+                      ProtobufCBuffer     *buffer);
+Uu__AccReply *
+       uu__acc_reply__unpack
+                     (ProtobufCAllocator  *allocator,
+                      size_t               len,
+                      const uint8_t       *data);
+void   uu__acc_reply__free_unpacked
+                     (Uu__AccReply *message,
                       ProtobufCAllocator *allocator);
 /* Uu__AutoDeviceRecord methods */
 void   uu__auto_device_record__init
@@ -517,6 +568,9 @@ void   uu__wol__free_unpacked
 typedef void (*Uu__Acc_Closure)
                  (const Uu__Acc *message,
                   void *closure_data);
+typedef void (*Uu__AccReply_Closure)
+                 (const Uu__AccReply *message,
+                  void *closure_data);
 typedef void (*Uu__AutoDeviceRecord_Closure)
                  (const Uu__AutoDeviceRecord *message,
                   void *closure_data);
@@ -560,6 +614,7 @@ typedef void (*Uu__Wol_Closure)
 /* --- descriptors --- */
 
 extern const ProtobufCMessageDescriptor uu__acc__descriptor;
+extern const ProtobufCMessageDescriptor uu__acc_reply__descriptor;
 extern const ProtobufCMessageDescriptor uu__auto_device_record__descriptor;
 extern const ProtobufCMessageDescriptor uu__bound_user__descriptor;
 extern const ProtobufCMessageDescriptor uu__check_bound_reply__descriptor;

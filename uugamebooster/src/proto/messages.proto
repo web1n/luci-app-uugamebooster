@@ -20,6 +20,24 @@ message Acc {
   optional string zone = 55;
 }
 
+message AccReply {
+	optional string mid = 1;
+	optional Device deviceinfo = 2;
+	optional uint32 result = 3;
+	optional Timestamp timestamp = 4;
+	optional uint32 server_ip = 5;
+	optional uint32 server_port = 6;
+	optional string router_type = 7;
+	optional string router_mac = 8;
+	optional string route_key = 9;
+	optional string route_type = 10;
+	optional uint32 extra_ip = 11;
+	optional uint32 extra_ip2 = 12;
+	optional bytes value13 = 13;
+	optional bytes value14 = 14;
+	optional string token = 15;
+}
+
 message AutoDeviceRecord {
   optional string mac = 1;
   optional string type = 2;
