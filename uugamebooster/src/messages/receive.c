@@ -4,7 +4,6 @@
 
 #include "../config/config.h"
 #include "../config/sni_rules.h"
-#include "../runtime/status.h"
 #include "internal.h"
 
 void uu_messages_handle_acc_receive(ProtobufCMessage *base, bool *modified)
@@ -22,27 +21,4 @@ void uu_messages_handle_acc_receive(ProtobufCMessage *base, bool *modified)
 	} else if (changed > 0) {
 		*modified = true;
 	}
-}
-
-bool uu_messages_update_status(enum uu_message_type type, ProtobufCMessage *message)
-{
-	switch (type) {
-	case UU_MESSAGE_ACC: {
-		Uu__Acc *acc = (Uu__Acc *)message;
-
-		return uu_status_update(acc->deviceinfo, acc);
-	}
-	case UU_MESSAGE_STOP_ACC:
-		return uu_status_update(((Uu__StopAcc *)message)->deviceinfo, NULL);
-	case UU_MESSAGE_CHECK_BOUND_REPLY: {
-		Uu__CheckBoundReply *reply = (Uu__CheckBoundReply *)message;
-
-		if (reply->has_is_bound) uu_status_bound(reply->is_bound);
-		break;
-	}
-	default:
-		break;
-	}
-
-	return true;
 }

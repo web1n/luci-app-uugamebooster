@@ -179,7 +179,7 @@ function updateStatus(table, data) {
 		var status = row.querySelector('.device-status');
 		var detail = host.detail;
 
-		if (running && detail) {
+		if (running && detail && detail.online === true) {
 			status.textContent = '%s %s'.format(detail.game, detail.zone);
 		} else if (running && leasesReady && !host.online) {
 			status.textContent = _('Offline');

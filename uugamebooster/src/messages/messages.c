@@ -6,6 +6,7 @@
 
 #include "message_log.h"
 #include "messages.h"
+#include "../runtime/status.h"
 #include "internal.h"
 
 bool uu_messages_handle(enum uu_message_type type, const void *body, size_t length,
@@ -40,7 +41,7 @@ bool uu_messages_handle(enum uu_message_type type, const void *body, size_t leng
 	}
 
 	uu_message_log(message);
-	result = uu_messages_update_status(type, message);
+	result = uu_status_update_receive(type, message);
 	protobuf_c_message_free_unpacked(message, NULL);
 
 	return result;
@@ -75,7 +76,10 @@ bool uu_messages_upload(enum uu_message_type type, const void *body, size_t leng
 
 	if (!modified) {
 		*output_length = length;
-		if (output) memcpy(output, body, length);
+		if (output) {
+			memcpy(output, body, length);
+			uu_status_update_upload(type, base);
+		}
 		protobuf_c_message_free_unpacked(base, NULL);
 		return true;
 	}
@@ -84,6 +88,7 @@ bool uu_messages_upload(enum uu_message_type type, const void *body, size_t leng
 	if (packed > capacity && output) goto error;
 	*output_length = packed;
 	if (output && protobuf_c_message_pack(base, output) != packed) goto error;
+	if (output) uu_status_update_upload(type, base);
 
 	protobuf_c_message_free_unpacked(base, NULL);
 	return true;
