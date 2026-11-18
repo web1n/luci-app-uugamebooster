@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uugamebooster
-PKG_VERSION:=14.11.2
+PKG_VERSION:=14.12.2
 PKG_RELEASE:=2
 
 PKG_SOURCE=$(PKG_NAME)-$(PKG_VERSION)-$(UU_TYPE).tar.gz
@@ -13,13 +13,13 @@ PKG_SOURCE_URL=https://uurouter.gdl.netease.com/uuplugin/$(UU_TYPE)/v$(PKG_VERSI
 
 ifeq ($(ARCH),aarch64)
   UU_TYPE:=h3c-nx30pro
-  PKG_HASH:=cadd042abb5f3bfdd0e487a7fa61a1b18a2c2cb6d6d14c1e8e3c915bb81cee86
+  PKG_HASH:=7b395cebefa7822e56580bf1e73ccecb49db84baed1932c72cdbf8fa96360b75
 else ifeq ($(ARCH),arm)
   UU_TYPE:=h3c-be18000
-  PKG_HASH:=5fa71e75152886d2a1ec14ca93d14ab79cbf674c5adfbf000f5495929446b76d
+  PKG_HASH:=838be3f4dae55a12c51a5fa544622cb1a13e5a6e6931d17fb94ef41ab3384360
 else ifeq ($(ARCH),mipsel)
   UU_TYPE:=jd-hr06
-  PKG_HASH:=902fa79d0477e59fcb1f3cc8daf691a390f0fc12f7acfd2f6e0b884e1a675115
+  PKG_HASH:=c1e5ea9a22c709311ec378b443b40ff8c9d6cc388e3615b336807fe508b27f98
 endif
 
 PKG_LICENSE:=Proprietary
